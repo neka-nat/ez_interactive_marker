@@ -1,17 +1,25 @@
 #!/usr/bin/env python
 import argparse
+import functools
 import roslib; roslib.load_manifest("ez_interactive_marker")
 import rospy
 from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from ez_interactive_marker.config_parser import load
+from ez_interactive_marker.commands import TopicPub
+
+tp_pub = TopicPub()
 
 def processFeedback(feedback):
     pass
 
 def make_menu(menu_handler, menu_config, parent=None):
     for c in menu_config:
-    	entry = menu_handler.insert(c['title'], parent)
+        callback = None
+        if 'command' in c:
+            if c['command']['type'] == 'topic_pub':
+                callback = functools.partial(tp_pub, c['command']['args'])
+    	entry = menu_handler.insert(c['title'], parent, callback=callback)
         if 'children' in c:
             make_menu(menu_handler, c['children'], entry)
 

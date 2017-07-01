@@ -6,7 +6,7 @@ Easily create interactive markers from yaml files.
 
 You can create a box with a menu by creating the following setting file.
 
-```yaml
+```yaml:sample_cube.yaml
 sample:
   interactive_marker:
     name: 'sample_cube'
@@ -24,6 +24,12 @@ sample:
     - title: "menu0"
     - title: "menu1"
       children: [{title: "submenu0"}, {title: "submenu1"}]
+```
+
+Please execute the following command.
+
+```
+rosrun ez_interactive_marker ez_interactive_marker -c simple_cube.yaml
 ```
 
 ![rviz_image](images/rviz_image.png)

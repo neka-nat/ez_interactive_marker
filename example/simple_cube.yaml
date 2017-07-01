@@ -13,5 +13,13 @@ sample:
             pose: {orientation: {w: 1.0}}
   menu:
     - title: "menu0"
+      command:
+        type: 'topic_pub'
+        args:
+          name: '/test'
+          type: 'std_msgs/String'
+          msg: {data: 'Hello.'}
     - title: "menu1"
-      children: [{title: "submenu0"}, {title: "submenu1"}]
+      children:
+        - title: "submenu0"
+        - title: "submenu1"
