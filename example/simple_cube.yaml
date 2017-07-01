@@ -11,6 +11,8 @@ sample:
             scale: {x: 0.45, y: 0.45, z: 0.45}
             color: {r: 0.0, g: 0.5, b: 0.5, a: 1.0}
             pose: {orientation: {w: 1.0}}
+      - name: 'move_x'
+        interaction_mode: 3
   menu:
     - title: "menu0"
       command:

@@ -10,7 +10,7 @@ from ez_interactive_marker.commands import TopicPub
 
 tp_pub = TopicPub()
 
-def processFeedback(feedback):
+def process_feedback(feedback):
     pass
 
 def make_menu(menu_handler, menu_config, parent=None):
@@ -35,7 +35,7 @@ def main():
     server = InteractiveMarkerServer(server_name)
     menu_handler = MenuHandler()
     for k, v in ims.items():
-    	server.insert(v['interactive_marker'], processFeedback)
+    	server.insert(v['interactive_marker'], process_feedback)
         if 'menu' in v:
             make_menu(menu_handler, v['menu'])
             menu_handler.apply(server, v['interactive_marker'].name)
