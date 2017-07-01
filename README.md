@@ -6,7 +6,7 @@ Easily create interactive markers from yaml files.
 
 You can create a box with a menu by creating the following setting file.
 
-```
+```yaml
 sample:
   interactive_marker:
     name: 'sample_cube'
