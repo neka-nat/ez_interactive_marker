@@ -12,12 +12,13 @@ def _include(loader, node):
         return yaml.load(inputfile)
 
 def _to_quat(loader, node):
-    quat = trans.quaternion_from_euler(*node.value)
+    val = [float(v.value) for v in node.value]
+    quat = trans.quaternion_from_euler(*val)
     return {'x': quat[0], 'y': quat[1], 'z': quat[2], 'w': quat[3]}
 
 yaml.add_constructor("!include", _include)
 yaml.add_constructor("!euler", _to_quat)
-yaml.add_constructor("!deg", lambda loader, node: np.deg2rad(node.value))
+yaml.add_constructor("!degree", lambda loader, node: np.deg2rad(float(node.value)))
 
 def load(file_name):
     config = yaml.load(open(file_name))
