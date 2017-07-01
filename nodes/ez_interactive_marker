@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+import argparse
+import roslib; roslib.load_manifest("ez_interactive_marker")
+import rospy
+from interactive_markers.interactive_marker_server import *
+from interactive_markers.menu_handler import *
+from ez_interactive_marker.config_parser import load
+
+def processFeedback(feedback):
+    pass
+
+def make_menu(menu_handler, menu_config, parent=None):
+    for c in menu_config:
+    	entry = menu_handler.insert(c['title'], parent)
+        if 'children' in c:
+            make_menu(menu_handler, c['children'], entry)
+
+def main():
+    parser = argparse.ArgumentParser(description='Interactive marker')
+    parser.add_argument('-c', '--config', type=str, help='')
+    args = parser.parse_args(rospy.myargv()[1:])
+    rospy.init_node("ez_interactive_marker")
+    server_name = rospy.get_param('~server_name',
+                                  'ez_interactive_marker_server')
+    file_name = rospy.get_param('~config_file', args.config)
+    ims = load(file_name)
+    server = InteractiveMarkerServer(server_name)
+    menu_handler = MenuHandler()
+    for k, v in ims.items():
+    	server.insert(v['interactive_marker'], processFeedback)
+        if 'menu' in v:
+            make_menu(menu_handler, v['menu'])
+            menu_handler.apply(server, v['interactive_marker'].name)
+    server.applyChanges()
+    rospy.spin()
+
+if __name__ == "__main__":
+   main()
