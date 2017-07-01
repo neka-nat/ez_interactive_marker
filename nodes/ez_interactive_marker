@@ -36,6 +36,7 @@ def main():
     menu_handler = MenuHandler()
     for k, v in ims.items():
     	server.insert(v['interactive_marker'], process_feedback)
+        rospy.loginfo('Insert: "%s"' % v['interactive_marker'].name)
         if 'menu' in v:
             make_menu(menu_handler, v['menu'])
             menu_handler.apply(server, v['interactive_marker'].name)

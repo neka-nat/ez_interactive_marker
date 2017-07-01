@@ -1,4 +1,4 @@
-sample:
+sample_cube:
   interactive_marker:
     name: 'sample_cube'
     header: {frame_id: 'base_link'}
@@ -25,3 +25,16 @@ sample:
       children:
         - title: "submenu0"
         - title: "submenu1"
+sample_sphere:
+  interactive_marker:
+    name: 'sample_sphere'
+    header: {frame_id: 'base_link'}
+    pose: {orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        interaction_mode: 2
+        markers:
+          - type: 2
+            scale: {x: 0.45, y: 0.45, z: 0.45}
+            color: {r: 1.0, a: 1.0}
+            pose: {orientation: {x: 1.0, w: 1.0}}
