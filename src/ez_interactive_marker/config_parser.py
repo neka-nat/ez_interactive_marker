@@ -7,7 +7,10 @@ _to_msg = message_converter.convert_dictionary_to_ros_message
 _type_name = 'visualization_msgs/InteractiveMarker'
 
 def _include(loader, node):
-    file_name = os.path.join(os.path.dirname(loader.name), node.value)
+    if node.value[0] != '/':
+        file_name = os.path.join(os.path.dirname(loader.name), node.value)
+    else:
+        file_name = node.value
     with file(file_name) as inputfile:
         return yaml.load(inputfile)
 
