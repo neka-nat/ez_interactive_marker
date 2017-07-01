@@ -37,4 +37,4 @@ sample_sphere:
           - type: 2
             scale: {x: 0.45, y: 0.45, z: 0.45}
             color: {r: 1.0, a: 1.0}
-            pose: {orientation: {x: 1.0, w: 1.0}}
+            pose: {orientation: {w: 1.0}}

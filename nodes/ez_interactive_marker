@@ -25,7 +25,7 @@ def make_menu(menu_handler, menu_config, parent=None):
 
 def main():
     parser = argparse.ArgumentParser(description='Interactive marker')
-    parser.add_argument('-c', '--config', type=str, help='')
+    parser.add_argument('-c', '--config', type=str, default='', help='')
     args = parser.parse_args(rospy.myargv()[1:])
     rospy.init_node("ez_interactive_marker")
     server_name = rospy.get_param('~server_name',
