@@ -1,5 +1,7 @@
 # ez_interactive_marker
 
+[![Build Status](https://travis-ci.org/neka-nat/ez_interactive_marker.svg?branch=master)](https://travis-ci.org/neka-nat/ez_interactive_marker)
+
 Easily create interactive markers from yaml files.
 
 ## yaml setting
