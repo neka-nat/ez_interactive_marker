@@ -1,6 +1,7 @@
 import os.path
 import numpy as np
 import yaml
+import roslib.message
 import tf.transformations as trans
 from rospy_message_converter import message_converter
 _to_msg = message_converter.convert_dictionary_to_ros_message
@@ -19,8 +20,13 @@ def _to_quat(loader, node):
     quat = trans.quaternion_from_euler(*val)
     return {'x': quat[0], 'y': quat[1], 'z': quat[2], 'w': quat[3]}
 
+def _to_uint(loader, node):
+    msgclass = roslib.message.get_message_class(node.value[0].value)
+    return getattr(msgclass, node.value[1].value)
+
 yaml.add_constructor("!include", _include)
 yaml.add_constructor("!euler", _to_quat)
+yaml.add_constructor("!enum", _to_uint)
 yaml.add_constructor("!degree", lambda loader, node: np.deg2rad(float(node.value)))
 
 def load(file_name):

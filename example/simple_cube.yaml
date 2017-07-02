@@ -5,13 +5,13 @@ sample_cube:
     pose: {orientation: {w: 1.0}}
     controls:
       - always_visible: True
-        interaction_mode: 2
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
         markers:
-          - type: 1
+          - type: !enum [visualization_msgs/Marker, CUBE]
             scale: {x: 0.45, y: 0.45, z: 0.45}
             color: {r: 0.0, g: 0.5, b: 0.5, a: 1.0}
       - name: 'move_x'
-        interaction_mode: 3
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, MOVE_AXIS]
   menu:
     - title: "menu0"
       command:
@@ -31,8 +31,8 @@ sample_sphere:
     pose: {position: {x: 1.0}, orientation: {w: 1.0}}
     controls:
       - always_visible: True
-        interaction_mode: 2
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
         markers:
-          - type: 2
+          - type: !enum [visualization_msgs/Marker, SPHERE]
             scale: {x: 0.45, y: 0.45, z: 0.45}
             color: {r: 1.0, a: 1.0}
