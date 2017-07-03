@@ -67,3 +67,39 @@ This tag converts degrees to radians.
 ```yaml
 !degrees 90.0 # -> 1.5708
 ```
+
+## menu settings
+
+You can specify several commands to be executed when menu is selected.
+
+### publish topic
+
+In the following example, the string "hello" is published to the topic of "test".
+Please also see [this example](exsample/simple_cube.yaml).
+
+```
+menu:
+  - title: "menu0"
+    command:
+      type: 'topic_pub'
+      args:
+        name: '/test'
+        type: 'std_msgs/String'
+        msg: {data: 'Hello.'}
+```
+
+### service call
+
+In the following example, "add_two_ints" service is called.
+Please also see [this example](exsample/add_two_ints.yaml).
+
+```
+menu:
+  - title: "menu0"
+    command:
+      type: 'service_call'
+      args:
+        name: 'add_two_ints'
+        type: 'rospy_tutorials/AddTwoInts'
+        request: {a: 1.0, b: 2.0}
+```
