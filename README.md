@@ -4,7 +4,7 @@
 
 Easily create interactive markers from yaml files.
 
-## yaml setting
+## Quick start
 
 You can create a box with a menu by creating the following setting file.
 
