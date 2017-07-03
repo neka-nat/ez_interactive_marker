@@ -77,7 +77,7 @@ You can specify several commands to be executed when menu is selected.
 In the following example, the string "hello" is published to the topic of "test".
 Please also see [this example](exsample/simple_cube.yaml).
 
-```
+```yaml
 menu:
   - title: "menu0"
     command:
@@ -93,7 +93,7 @@ menu:
 In the following example, "add_two_ints" service is called.
 Please also see [this example](exsample/add_two_ints.yaml).
 
-```
+```yaml
 menu:
   - title: "menu0"
     command:
