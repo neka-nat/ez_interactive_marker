@@ -16,9 +16,9 @@ sample:
     pose: {orientation: {w: 1.0}}
     controls:
       - always_visible: True
-        interaction_mode: 2
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
         markers:
-          - type: 1
+          - type: !enum [visualization_msgs/Marker, CUBE]
             scale: {x: 0.45, y: 0.45, z: 0.45}
             color: {r: 0.0, g: 0.5, b: 0.5, a: 1.0}
             pose: {orientation: {w: 1.0}}
@@ -51,7 +51,7 @@ This tag includes the written configuration file and expand the contents.
 This tag expands the enum variable of the specified message module.
 
 ```yaml
-!eum [visualization_msgs/Marker, CUBE]
+!enum [visualization_msgs/Marker, CUBE]
 ```
 
 ### euler
