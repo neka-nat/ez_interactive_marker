@@ -16,7 +16,7 @@ class TestConfigParser(unittest.TestCase):
         self.assertEqual(dst['value'], {'test': 1})
 
     def test_load_degree(self):
-        src = '{value: !degree 180.0}'
+        src = '{value: !degrees 180.0}'
         dst = ec.yaml.load(src)
         self.assertAlmostEqual(dst['value'], np.pi)
 

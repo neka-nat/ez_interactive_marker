@@ -5,7 +5,7 @@ from rospy_message_converter import message_converter
 def convert_dictionary_to_ros_request(service_type, dictionary):
     service_class = roslib.message.get_service_class(service_type)
     request = service_class._request_class()
-    request_fields = dict(message_converter._get_message_fields(requesst))
+    request_fields = dict(message_converter._get_message_fields(request))
 
     for field_name, field_value in dictionary.items():
         if field_name in request_fields:

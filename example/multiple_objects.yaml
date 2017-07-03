@@ -1,0 +1,33 @@
+cube:
+  interactive_marker:
+    name: 'cube'
+    header: {frame_id: 'base_link'}
+    pose: {orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        markers:
+          - type: !enum [visualization_msgs/Marker, CUBE]
+            scale: {x: 0.45, y: 0.45, z: 0.45}
+            color: {g: 1.0, a: 1.0}
+sphere:
+  interactive_marker:
+    name: 'sphere'
+    header: {frame_id: 'base_link'}
+    pose: {position: {x: 1.0}, orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        markers:
+          - type: !enum [visualization_msgs/Marker, SPHERE]
+            scale: {x: 0.45, y: 0.45, z: 0.45}
+            color: {r: 1.0, a: 1.0}
+cylinder:
+  interactive_marker:
+    name: 'cylinder'
+    header: {frame_id: 'base_link'}
+    pose: {position: {x: 2.0}, orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        markers:
+          - type: !enum [visualization_msgs/Marker, CYLINDER]
+            scale: {x: 0.45, y: 0.45, z: 0.45}
+            color: {b: 1.0, a: 1.0}

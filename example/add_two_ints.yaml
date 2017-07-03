@@ -1,0 +1,25 @@
+# Please execute ez_interactive_marker with this configuration
+# after bringing up add_two_ints_server.
+# `rosun rospy_tutorial add_two_ints_server`
+add_two_ints:
+  interactive_marker:
+    name: 'add_two_ints'
+    header: {frame_id: 'base_link'}
+    pose: {orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
+        markers:
+          - type: !enum [visualization_msgs/Marker, ARROW]
+            scale: {x: 0.8, y: 0.2, z: 0.2}
+            color: {r: 1.0, a: 1.0}
+  menu:
+    - title: "main menu"
+      children:
+        - title: "add_two_ints"
+          command:
+            type: 'service_call'
+            args:
+              name: 'add_two_ints'
+              type: 'rospy_tutorials/AddTwoInts'
+              request: {a: 1.0, b: 2.0}

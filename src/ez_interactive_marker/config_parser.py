@@ -27,7 +27,7 @@ def _to_uint(loader, node):
 yaml.add_constructor("!include", _include)
 yaml.add_constructor("!euler", _to_quat)
 yaml.add_constructor("!enum", _to_uint)
-yaml.add_constructor("!degree", lambda loader, node: np.deg2rad(float(node.value)))
+yaml.add_constructor("!degrees", lambda loader, node: np.deg2rad(float(node.value)))
 
 def load(file_name):
     config = yaml.load(open(file_name))
