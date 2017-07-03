@@ -35,3 +35,35 @@ rosrun ez_interactive_marker ez_interactive_marker -c simple_cube.yaml
 ```
 
 ![rviz_image](images/rviz_image.png)
+
+## Supported yaml tags
+
+It is possible to use several tags in the configuration file.
+
+### include
+This tag includes the written configuration file and expand the contents.
+
+```yaml
+!include sub_settings.yaml
+```
+
+### enum
+This tag expands the enum variable of the specified message module.
+
+```yaml
+!eum [visualization_msgs/Marker, CUBE]
+```
+
+### euler
+This tag converts euler xyz angle to quaternion.
+
+```yaml
+!euler [3.14159, 0.0, 0.0] # -> [1.0, 0.0, 0.0, 0.0]
+```
+
+### degrees
+This tag converts degrees to radians.
+
+```yaml
+!degrees 90.0 # -> 1.5708
+```
