@@ -68,14 +68,14 @@ This tag converts degrees to radians.
 !degrees 90.0 # -> 1.5708
 ```
 
-## menu settings
+## Menu settings
 
 You can specify several commands to be executed when menu is selected.
 
 ### publish topic
 
 In the following example, the string "hello" is published to the topic of "test".
-Please also see [this example](exsample/simple_cube.yaml).
+Please also see [this example](example/simple_cube.yaml).
 
 ```yaml
 menu:
@@ -91,7 +91,7 @@ menu:
 ### service call
 
 In the following example, "add_two_ints" service is called.
-Please also see [this example](exsample/add_two_ints.yaml).
+Please also see [this example](example/add_two_ints.yaml).
 
 ```yaml
 menu:
