@@ -1,0 +1,25 @@
+menu_check_group:
+  interactive_marker:
+    name: 'menu_check_group'
+    header: {frame_id: 'base_link'}
+    pose: {orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
+        markers:
+          - type: !enum [visualization_msgs/Marker, CUBE]
+            scale: {x: 0.45, y: 0.45, z: 0.45}
+            color: {r: 0.0, g: 0.5, b: 0.5, a: 1.0}
+  menu:
+    - title: "menu0"
+      group: "a"
+    - title: "menu1"
+      group: "a"
+    - title: "menu2"
+      children:
+        - title: "submenu0"
+          group: "b"
+        - title: "submenu1"
+          group: "b"
+        - title: "submenu2"
+          group: "b"

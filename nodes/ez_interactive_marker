@@ -7,26 +7,41 @@ from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from ez_interactive_marker.config_parser import load
 from ez_interactive_marker.commands import TopicPub, ServiceCall
+from ez_interactive_marker.controllers import GroupingCheckStateController
 
-tp_pub = TopicPub()
-sv_call = ServiceCall()
-
-def process_feedback(feedback):
+def process_feedback(feedback=None):
     pass
 
-def make_menu(menu_handler, menu_config, parent=None):
-    for c in menu_config:
-        callback = None
-        if 'command' in c:
-            if c['command']['type'] == 'topic_pub':
-                callback = functools.partial(tp_pub, c['command']['args'])
-            elif c['command']['type'] == 'service_call':
-                callback = functools.partial(sv_call, c['command']['args'])
-            else:
-                raise ValueError('Unsupported command type %s' % c['command']['type'])
-    	entry = menu_handler.insert(c['title'], parent, callback=callback)
-        if 'children' in c:
-            make_menu(menu_handler, c['children'], entry)
+class EzInteractiveMarker:
+    def __init__(self, server, menu_handler):
+        self._server = server
+        self._menu_handler = menu_handler
+        self._gp_csc = GroupingCheckStateController(server, menu_handler)
+        self._tp_pub = TopicPub()
+        self._sv_call = ServiceCall()
+
+    def make_menu(self, menu_config, parent=None):
+        for c in menu_config:
+            callback = functools.partial(self._execute_func, process_feedback)
+            if 'command' in c:
+                if c['command']['type'] == 'topic_pub':
+                    callback = functools.partial(self._execute_func,
+                                                 functools.partial(self._tp_pub, c['command']['args']))
+                elif c['command']['type'] == 'service_call':
+                    callback = functools.partial(self._execute_func,
+                                                 functools.partial(self._sv_call, c['command']['args']))
+                else:
+                    raise ValueError('Unsupported command type %s' % c['command']['type'])
+            entry = self._menu_handler.insert(c['title'], parent, callback=callback)
+            if 'group' in c:
+                self._gp_csc.add_group(c['group'], entry)
+            if 'children' in c:
+                self.make_menu(c['children'], entry)
+
+    def _execute_func(self, main_func, feedback=None):
+        main_func(feedback)
+        if not feedback is None:
+            self._gp_csc.update_check_state(feedback.menu_entry_id)
 
 def main():
     parser = argparse.ArgumentParser(description='Interactive marker')
@@ -39,11 +54,12 @@ def main():
     ims = load(file_name)
     server = InteractiveMarkerServer(server_name)
     menu_handler = MenuHandler()
+    eim = EzInteractiveMarker(server, menu_handler)
     for k, v in ims.items():
     	server.insert(v['interactive_marker'], process_feedback)
         rospy.loginfo('Insert: "%s"' % v['interactive_marker'].name)
         if 'menu' in v:
-            make_menu(menu_handler, v['menu'])
+            eim.make_menu(v['menu'])
             menu_handler.apply(server, v['interactive_marker'].name)
     server.applyChanges()
     rospy.spin()

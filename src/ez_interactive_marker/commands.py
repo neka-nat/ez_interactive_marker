@@ -27,6 +27,7 @@ class TopicPub(CommandBase):
         self._pubs = {}
         self._msgs = {}
     def __call__(self, args, feedback=None):
+        rospy.loginfo('topic pub: ' + str(args))
         name = args['name']
         mtype = args['type']
         msg = args['msg']
@@ -44,6 +45,7 @@ class ServiceCall(CommandBase):
         self._srvs = {}
         self._reqs = {}
     def __call__(self, args, feedback=None):
+        rospy.loginfo('service call: ' + str(args))
         name = args['name']
         mtype = args['type']
         req = args['request']
