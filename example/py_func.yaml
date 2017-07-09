@@ -1,0 +1,22 @@
+py_func:
+  interactive_marker:
+    name: 'py_func'
+    header: {frame_id: 'base_link'}
+    pose: {orientation: {w: 1.0}}
+    controls:
+      - always_visible: True
+        interaction_mode: !enum [visualization_msgs/InteractiveMarkerControl, BUTTON]
+        markers:
+          - type: !enum [visualization_msgs/Marker, ARROW]
+            scale: {x: 0.8, y: 0.2, z: 0.2}
+            color: {r: 1.0, a: 1.0}
+  menu:
+    - title: "main menu"
+      children:
+        - title: "loginfo"
+          command:
+            type: 'py_function'
+            args:
+              module: 'rospy'
+              func: 'loginfo'
+              args: {msg: 'Call rospy.loginfo!'}

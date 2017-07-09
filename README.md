@@ -103,3 +103,20 @@ menu:
         type: 'rospy_tutorials/AddTwoInts'
         request: {a: 1.0, b: 2.0}
 ```
+
+### python function
+
+In the following example, python function is called.
+Please also see [this example](example/py_func.yaml).
+
+```yaml
+menu:
+  - title: "loginfo"
+    command:
+      type: 'py_function'
+      args:
+        module: 'rospy'
+        func: 'loginfo'
+        args: {msg: 'Call rospy.loginfo!'}
+```
+

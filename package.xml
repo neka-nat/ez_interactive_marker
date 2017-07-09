@@ -32,7 +32,7 @@
   <run_depend>rospy_message_converter</run_depend>
   <run_depend>tf</run_depend>
   <!-- Use test_depend for packages you need only for testing: -->
-  <!--   <test_depend>gtest</test_depend> -->
+  <test_depend>python-nose</test_depend>
   <buildtool_depend>catkin</buildtool_depend>
 
 

@@ -1,3 +1,4 @@
+import importlib
 import rospy
 import roslib.message
 from rospy_message_converter import message_converter
@@ -55,3 +56,15 @@ class ServiceCall(CommandBase):
         if not name in self._reqs:
             self._reqs[name] = convert_dictionary_to_ros_request(mtype, req)
         self._srvs[name](self._reqs[name])
+
+class PyFunction(CommandBase):
+    def __init__(self):
+        self._mods = {}
+    def __call__(self, args, feedback=None):
+        rospy.loginfo('python function: ' + str(args))
+        mod = args['module']
+        func = args['func']
+        fa = args['args']
+        if not mod in self._mods:
+            self._mods[mod] = importlib.import_module(mod)
+        getattr(self._mods[mod], func)(**fa)

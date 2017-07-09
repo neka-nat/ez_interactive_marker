@@ -6,7 +6,7 @@ import rospy
 from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from ez_interactive_marker.config_parser import load
-from ez_interactive_marker.commands import TopicPub, ServiceCall
+from ez_interactive_marker.commands import TopicPub, ServiceCall, PyFunction
 from ez_interactive_marker.controllers import GroupingCheckStateController
 
 def process_feedback(feedback=None):
@@ -19,6 +19,7 @@ class EzInteractiveMarker:
         self._gp_csc = GroupingCheckStateController(self._server, self._menu_handler)
         self._tp_pub = TopicPub()
         self._sv_call = ServiceCall()
+        self._py_func = PyFunction()
         for k, v in config.items():
             self._server.insert(v['interactive_marker'], process_feedback)
             rospy.loginfo('Insert: "%s"' % v['interactive_marker'].name)
@@ -36,6 +37,9 @@ class EzInteractiveMarker:
                 elif c['command']['type'] == 'service_call':
                     callback = functools.partial(self._execute_func,
                                                  functools.partial(self._sv_call, c['command']['args']))
+                elif c['command']['type'] == 'py_function':
+                    callback = functools.partial(self._execute_func,
+                                                 functools.partial(self._py_func, c['command']['args']))
                 else:
                     raise ValueError('Unsupported command type %s' % c['command']['type'])
             entry = self._menu_handler.insert(c['title'], parent, callback=callback)
