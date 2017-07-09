@@ -54,8 +54,8 @@ class EzInteractiveMarker:
             self._gp_csc.update_check_state(feedback.menu_entry_id)
 
 def main():
-    parser = argparse.ArgumentParser(description='Interactive marker')
-    parser.add_argument('-c', '--config', type=str, default='', help='')
+    parser = argparse.ArgumentParser(description='Ez Interactive marker')
+    parser.add_argument('-c', '--config', type=str, default='', help='Config file name.')
     args = parser.parse_args(rospy.myargv()[1:])
     rospy.init_node("ez_interactive_marker")
     server_name = rospy.get_param('~server_name',
