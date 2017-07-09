@@ -1,0 +1,4 @@
+<launch>
+  <test test-name="test_config_parser" pkg="ez_interactive_marker" type="test_config_parser.py" />
+  <test test-name="test_controller" pkg="ez_interactive_marker" type="test_controller.py" />
+</launch>

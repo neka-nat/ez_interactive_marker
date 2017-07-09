@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 PKG = 'ez_interactive_marker'
 import roslib; roslib.load_manifest(PKG)
 import unittest
