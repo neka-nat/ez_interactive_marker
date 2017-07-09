@@ -13,14 +13,20 @@ def process_feedback(feedback=None):
     pass
 
 class EzInteractiveMarker:
-    def __init__(self, server, menu_handler):
+    def __init__(self, server, config):
         self._server = server
-        self._menu_handler = menu_handler
-        self._gp_csc = GroupingCheckStateController(server, menu_handler)
+        self._menu_handler = MenuHandler()
+        self._gp_csc = GroupingCheckStateController(self._server, self._menu_handler)
         self._tp_pub = TopicPub()
         self._sv_call = ServiceCall()
+        for k, v in config.items():
+            self._server.insert(v['interactive_marker'], process_feedback)
+            rospy.loginfo('Insert: "%s"' % v['interactive_marker'].name)
+            if 'menu' in v:
+                self._make_menu(v['menu'])
+                self._menu_handler.apply(self._server, v['interactive_marker'].name)
 
-    def make_menu(self, menu_config, parent=None):
+    def _make_menu(self, menu_config, parent=None):
         for c in menu_config:
             callback = functools.partial(self._execute_func, process_feedback)
             if 'command' in c:
@@ -36,7 +42,7 @@ class EzInteractiveMarker:
             if 'group' in c:
                 self._gp_csc.add_group(c['group'], entry)
             if 'children' in c:
-                self.make_menu(c['children'], entry)
+                self._make_menu(c['children'], entry)
 
     def _execute_func(self, main_func, feedback=None):
         main_func(feedback)
@@ -53,14 +59,7 @@ def main():
     file_name = rospy.get_param('~config_file', args.config)
     ims = load(file_name)
     server = InteractiveMarkerServer(server_name)
-    menu_handler = MenuHandler()
-    eim = EzInteractiveMarker(server, menu_handler)
-    for k, v in ims.items():
-    	server.insert(v['interactive_marker'], process_feedback)
-        rospy.loginfo('Insert: "%s"' % v['interactive_marker'].name)
-        if 'menu' in v:
-            eim.make_menu(v['menu'])
-            menu_handler.apply(server, v['interactive_marker'].name)
+    eim = EzInteractiveMarker(server, ims)
     server.applyChanges()
     rospy.spin()
 

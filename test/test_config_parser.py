@@ -15,7 +15,12 @@ class TestConfigParser(unittest.TestCase):
         dst = ec.yaml.load(src)
         self.assertEqual(dst['value'], {'test': 1})
 
-    def test_load_degree(self):
+    def test_load_enum(self):
+        src = '{value: !enum [visualization_msgs/Marker, CUBE]}'
+        dst = ec.yaml.load(src)
+        self.assertEqual(dst['value'], 1)
+
+    def test_load_degrees(self):
         src = '{value: !degrees 180.0}'
         dst = ec.yaml.load(src)
         self.assertAlmostEqual(dst['value'], np.pi)

@@ -31,7 +31,7 @@ sample:
 Please execute the following command.
 
 ```
-rosrun ez_interactive_marker ez_interactive_marker -c simple_cube.yaml
+rosrun ez_interactive_marker ez_interactive_marker -c sample_cube.yaml
 ```
 
 ![rviz_image](images/rviz_image.png)
