@@ -7,7 +7,7 @@ from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from ez_interactive_marker.config_parser import load
 from ez_interactive_marker.commands import TopicPub, ServiceCall, PyFunction
-from ez_interactive_marker.controllers import GroupingCheckStateController
+from ez_interactive_marker.controllers import GroupedCheckStateController
 
 def process_feedback(feedback=None):
     pass
@@ -16,7 +16,7 @@ class EzInteractiveMarker:
     def __init__(self, server, config):
         self._server = server
         self._menu_handler = MenuHandler()
-        self._gp_csc = GroupingCheckStateController(self._server, self._menu_handler)
+        self._gp_csc = GroupedCheckStateController(self._server, self._menu_handler)
         self._tp_pub = TopicPub()
         self._sv_call = ServiceCall()
         self._py_func = PyFunction()

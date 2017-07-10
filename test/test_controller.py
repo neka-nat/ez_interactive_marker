@@ -8,11 +8,11 @@ from interactive_markers.menu_handler import *
 import ez_interactive_marker.controllers as ec 
 
 class TestController(unittest.TestCase):
-    def test_grouping_check_state(self):
+    def test_grouped_check_state(self):
         rospy.init_node("test")
         server = InteractiveMarkerServer("test")
         menu_handler = MenuHandler()
-        controller = ec.GroupingCheckStateController(server, menu_handler)
+        controller = ec.GroupedCheckStateController(server, menu_handler)
         e0 = menu_handler.insert("menu0")
         controller.add_group("group0", e0)
         e1 = menu_handler.insert("menu1")

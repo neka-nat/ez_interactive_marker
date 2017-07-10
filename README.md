@@ -120,3 +120,29 @@ menu:
         args: {msg: 'Call rospy.loginfo!'}
 ```
 
+### Grouped check box
+
+You can create grouped checkboxes.
+
+```yaml
+menu:
+  - title: "menu0"
+    group: "a"
+  - title: "menu1"
+    group: "a"
+  - title: "menu2"
+    children:
+      - title: "submenu0"
+        group: "b"
+      - title: "submenu1"
+        group: "b"
+      - title: "submenu2"
+        group: "b"
+```
+
+![rviz_image](images/grouped_menu.png)
+
+In this case, menu0 and menu1 belong to group a,
+and submenu0, submenu1 and submenu2 belong to group b.
+
+Check boxes are controlled exclusively within the same group.

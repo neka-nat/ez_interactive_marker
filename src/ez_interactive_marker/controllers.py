@@ -4,7 +4,7 @@ class ControllerBase(object):
     def __init__(self):
         pass
 
-class GroupingCheckStateController(ControllerBase):
+class GroupedCheckStateController(ControllerBase):
     def __init__(self, server, menu_handler):
         self._server = server
         self._menu_handler = menu_handler
