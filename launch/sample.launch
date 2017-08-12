@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="ez_interactive_marker" type="ez_interactive_marker" name="ez_interactive_marker" args="-c $(find ez_interactive_marker)/example/simple_cube.yaml" />
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ez_interactive_marker)/config/sample.rviz" />
+</launch>

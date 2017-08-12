@@ -1,3 +1,4 @@
+from abc import ABCMeta, abstractmethod
 import importlib
 import rospy
 import roslib.message
@@ -20,10 +21,17 @@ def convert_dictionary_to_ros_request(service_type, dictionary):
     return request
 
 class CommandBase(object):
+    """ base class for specifying the command at the time of menu click. """
+    __metaclass__ = ABCMeta
     def __init__(self):
         pass
 
+    @abstractmethod
+    def __call__(self, args, feedback=None):
+        return None
+
 class TopicPub(CommandBase):
+    """ Publish topic """
     def __init__(self):
         self._pubs = {}
         self._msgs = {}
@@ -42,6 +50,7 @@ class TopicPub(CommandBase):
         self._pubs[name].publish(self._msgs[name])
 
 class ServiceCall(CommandBase):
+    """ Call service """
     def __init__(self):
         self._srvs = {}
         self._reqs = {}
@@ -58,6 +67,7 @@ class ServiceCall(CommandBase):
         self._srvs[name](self._reqs[name])
 
 class PyFunction(CommandBase):
+    """ Call python function """
     def __init__(self):
         self._mods = {}
     def __call__(self, args, feedback=None):
