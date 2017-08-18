@@ -68,6 +68,22 @@ This tag converts degrees to radians.
 !degrees 90.0 # -> 1.5708
 ```
 
+## Subscribers
+
+Some subscribers are added when generating a interactive marker.
+
+- **/ez_interactive_marker/\<interactive marker name\>/update_interactive_marker**
+  - Keep the interactive marker's name and update it using `InteractiveMarker` message.
+
+- **/ez_interactive_marker/\<interactive marker name\>/update_pose**
+  - Update the interactive marker's pose.
+
+- **/ez_interactive_marker/\<interactive marker name\>/add_control**
+  - Add `InteractiveMarkerControl` to the interactive marker.
+
+- **/ez_interactive_marker/\<interactive marker name\>/remove_control**
+  - Delete matching `InteractiveMarkerControl` with `InteractiveMarkerControl.name`.
+
 ## Menu settings
 
 You can specify several commands to be executed when menu is selected.
