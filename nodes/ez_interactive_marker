@@ -29,6 +29,7 @@ class EzInteractiveMarker:
             if 'menu' in v:
                 self._make_menu(v['menu'])
                 self._menu_handler.apply(self._server, v['interactive_marker'].name)
+        self._server.applyChanges()
 
     def _make_menu(self, menu_config, parent=None):
         for c in menu_config:
@@ -64,10 +65,11 @@ def main():
     server_name = rospy.get_param('~server_name',
                                   'ez_interactive_marker_server')
     file_name = rospy.get_param('~config_file', args.config)
-    ims = load(file_name)
+    ims = {}
+    if file_name != '':
+        ims = load(file_name)
     server = InteractiveMarkerServer(server_name)
     eim = EzInteractiveMarker(server, ims)
-    server.applyChanges()
     rospy.spin()
 
 if __name__ == "__main__":
