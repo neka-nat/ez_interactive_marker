@@ -8,10 +8,10 @@ Easily create interactive markers from yaml files.
 
 You can create a box with a menu by creating the following setting file.
 
-```yaml:sample_cube.yaml
+```yaml:simple_cube.yaml
 sample:
   interactive_marker:
-    name: 'sample_cube'
+    name: 'simple_cube'
     header: {frame_id: 'base_link'}
     pose: {orientation: {w: 1.0}}
     controls:
@@ -31,7 +31,16 @@ sample:
 Please execute the following command.
 
 ```
-rosrun ez_interactive_marker ez_interactive_marker -c sample_cube.yaml
+cd example
+rosrun ez_interactive_marker ez_interactive_marker -c simple_cube.yaml
+```
+
+Or the following commands are publishing the configuration.
+
+```
+rosrun ez_interactive_marker ez_interactive_marker
+# another console
+rosrun ez_interactive_marker publish_config.py
 ```
 
 ![rviz_image](images/rviz_image.png)

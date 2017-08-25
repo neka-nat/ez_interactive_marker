@@ -1,6 +1,6 @@
 simple_cube:
   interactive_marker:
-    name: 'sample_cube'
+    name: 'simple_cube'
     header: {frame_id: 'base_link'}
     pose: {orientation: {w: 1.0}}
     controls:
