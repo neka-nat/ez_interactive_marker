@@ -31,6 +31,7 @@
   <run_depend>rospy</run_depend>
   <run_depend>roslib</run_depend>
   <run_depend>rospy_message_converter</run_depend>
+  <run_depend>std_msgs</run_depend>
   <run_depend>visualization_msgs</run_depend>
   <run_depend>tf</run_depend>
   <!-- Use test_depend for packages you need only for testing: -->

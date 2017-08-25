@@ -6,7 +6,7 @@ import rospy
 import std_msgs.msg as sm
 from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
-from ez_interactive_marker.config_parser import load
+from ez_interactive_marker.config_parser import load_from_string, load
 from ez_interactive_marker.commands import TopicPub, ServiceCall, PyFunction
 from ez_interactive_marker.controllers import GroupedCheckStateController
 from ez_interactive_marker.subscriber_generator import SubscriberGenerator
@@ -26,7 +26,7 @@ class EzInteractiveMarker:
         node_name = rospy.get_name()
         rospy.Subscriber(node_name + '/update_config',
                          sm.String,
-                         self._update_config)
+                         self._update_config_from_string)
         self._update_config(config)
 
     def _update_config(self, config):
@@ -38,6 +38,9 @@ class EzInteractiveMarker:
                 self._make_menu(v['menu'])
                 self._menu_handler.apply(self._server, v['interactive_marker'].name)
         self._server.applyChanges()
+
+    def _update_config_from_string(self, config):
+        self._update_config(load_from_string(config.data))
 
     def _make_menu(self, menu_config, parent=None):
         for c in menu_config:

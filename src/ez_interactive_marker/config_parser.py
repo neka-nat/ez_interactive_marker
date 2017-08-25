@@ -29,8 +29,12 @@ yaml.add_constructor("!euler", _to_quat)
 yaml.add_constructor("!enum", _to_uint)
 yaml.add_constructor("!degrees", lambda loader, node: np.deg2rad(float(node.value)))
 
-def load(file_name):
-    config = yaml.load(open(file_name))
+def load_from_string(s):
+    config = yaml.load(s)
     for k, v in config.items():
         config[k]['interactive_marker'] = _to_msg(_type_name, v['interactive_marker'])
     return config
+
+def load(file_name):
+    with open(file_name) as f:
+        return load_from_string(f.read())
