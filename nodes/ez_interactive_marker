@@ -3,6 +3,7 @@ import argparse
 import functools
 import roslib; roslib.load_manifest("ez_interactive_marker")
 import rospy
+import std_msgs.msg as sm
 from interactive_markers.interactive_marker_server import *
 from interactive_markers.menu_handler import *
 from ez_interactive_marker.config_parser import load
@@ -22,6 +23,12 @@ class EzInteractiveMarker:
         self._tp_pub = TopicPub()
         self._sv_call = ServiceCall()
         self._py_func = PyFunction()
+        rospy.Subscriber('/ez_interactive_marker/update_config',
+                         sm.String,
+                         self._update_config)
+        self._update_config(config)
+
+    def _update_config(self, config):
         for k, v in config.items():
             self._server.insert(v['interactive_marker'], process_feedback)
             self._sub_gen.generate(v['interactive_marker'].name)
@@ -63,7 +70,7 @@ def main():
     args = parser.parse_args(rospy.myargv()[1:])
     rospy.init_node("ez_interactive_marker")
     server_name = rospy.get_param('~server_name',
-                                  'ez_interactive_marker_server')
+                                  'ez_interactive_marker')
     file_name = rospy.get_param('~config_file', args.config)
     ims = {}
     if file_name != '':

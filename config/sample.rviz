@@ -56,7 +56,7 @@ Visualization Manager:
       Show Axes: false
       Show Descriptions: true
       Show Visual Aids: false
-      Update Topic: /ez_interactive_marker_server/update
+      Update Topic: /ez_interactive_marker/update
       Value: true
   Enabled: true
   Global Options:
