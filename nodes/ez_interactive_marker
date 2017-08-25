@@ -23,7 +23,8 @@ class EzInteractiveMarker:
         self._tp_pub = TopicPub()
         self._sv_call = ServiceCall()
         self._py_func = PyFunction()
-        rospy.Subscriber('/ez_interactive_marker/update_config',
+        node_name = rospy.get_name()
+        rospy.Subscriber(node_name + '/update_config',
                          sm.String,
                          self._update_config)
         self._update_config(config)
