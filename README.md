@@ -40,7 +40,8 @@ Or the following commands are publishing the configuration.
 ```
 rosrun ez_interactive_marker ez_interactive_marker
 # another console
-rosrun ez_interactive_marker publish_config.py
+cd example
+rosrun ez_interactive_marker publish_config.py simple_cube.yaml
 ```
 
 ![rviz_image](images/rviz_image.png)
