@@ -68,7 +68,7 @@ This tag expands the enum variable of the specified message module.
 This tag converts euler xyz angle to quaternion.
 
 ```yaml
-!euler [3.14159, 0.0, 0.0] # -> [1.0, 0.0, 0.0, 0.0]
+!euler [3.14159, 0.0, 0.0] # -> {x: 1.0, y: 0.0, z: 0.0, w: 0.0}
 ```
 
 ### degrees
