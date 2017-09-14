@@ -19,7 +19,7 @@ simple_cube:
         args:
           name: '/test'
           type: 'std_msgs/String'
-          msg: {data: 'Hello.'}
+          data: {data: 'Hello.'}
     - title: "menu1"
       children:
         - title: "submenu0"

@@ -111,7 +111,7 @@ menu:
       args:
         name: '/test'
         type: 'std_msgs/String'
-        msg: {data: 'Hello.'}
+        data: {data: 'Hello.'}
 ```
 
 ### service call
@@ -127,7 +127,7 @@ menu:
       args:
         name: 'add_two_ints'
         type: 'rospy_tutorials/AddTwoInts'
-        request: {a: 1.0, b: 2.0}
+        data: {a: 1.0, b: 2.0}
 ```
 
 ### python function

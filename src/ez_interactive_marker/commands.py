@@ -39,7 +39,7 @@ class TopicPub(CommandBase):
         rospy.loginfo('topic pub: ' + str(args))
         name = args['name']
         mtype = args['type']
-        msg = args['msg']
+        msg = args['data']
         if not name in self._pubs:
             self._pubs[name] = rospy.Publisher(name,
                                                roslib.message.get_message_class(mtype),
@@ -58,7 +58,7 @@ class ServiceCall(CommandBase):
         rospy.loginfo('service call: ' + str(args))
         name = args['name']
         mtype = args['type']
-        req = args['request']
+        req = args['data']
         if not name in self._srvs:
             self._srvs[name] = rospy.ServiceProxy(name,
                                                   roslib.message.get_service_class(mtype))

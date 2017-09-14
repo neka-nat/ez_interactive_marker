@@ -22,4 +22,4 @@ add_two_ints:
             args:
               name: 'add_two_ints'
               type: 'rospy_tutorials/AddTwoInts'
-              request: {a: 1.0, b: 2.0}
+              data: {a: 1.0, b: 2.0}
