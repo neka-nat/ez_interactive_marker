@@ -166,7 +166,7 @@ menu:
         group: "b"
 ```
 
-![rviz_image](images/grouped_menu.png)
+![rviz_image](images/grouped_menu.gif)
 
 In this case, menu0 and menu1 belong to group a,
 and submenu0, submenu1 and submenu2 belong to group b.
