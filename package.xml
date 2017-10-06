@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>ez_interactive_marker</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>Easily create interactive markers from yaml files</description>
 
   <maintainer email="nekanat.stock@gmail.com">neka-nat</maintainer>
