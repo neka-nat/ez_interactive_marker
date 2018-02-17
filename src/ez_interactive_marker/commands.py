@@ -15,8 +15,8 @@ def convert_dictionary_to_ros_request(service_type, dictionary):
             field_value = message_converter._convert_to_ros_type(field_type, field_value)
             setattr(request, field_name, field_value)
         else:
-            error_message = 'ROS message type "{0}" has no field named "{1}"'\
-                .format(message_type, field_name)
+            error_message = 'ROS request type "{0}" has no field named "{1}"'\
+                .format(service_type, field_name)
             raise ValueError(error_message)
     return request
 
